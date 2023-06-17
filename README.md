@@ -94,3 +94,53 @@ There will be a database required to keep the logs of the performance and users 
 This is how the chatbot module should work for each individual messages. 
 
 ****
+# System Architecture
+
+*We have already assumed the developed system will be deplopyed in AWS. The following will be mostly based on AWS's services.*
+
+For API gateway we can use AWS APIgate way and there session manager service by which we can manage session and session ID as well.
+
+We can use  AWS DynamoDB for models internal usecases that we have stated earlier. Also to create the knowledge graph.
+
+Model logs will be monitored in AWS cloudwatch and can be saved in S3 buckets for debugging.
+
+Finally for LLM/gpt-3 we can use AWS's in house service AWS LEX. 
+
+But you need more accuracy and performance in house developed of GPT-3 based model in suggested which in deployed inside a Lambda Function.
+
+## AWS Lambda based Mircroservice Approach 
+- As stated in our solution we will be using multiple modules for various tasks. We will be needing various models in the chat bot. Like sentiment analysis and NER are two different models. In this approach we develop each model seperately train in locally and write down inference pipeline in a docker. 
+- Then upload the Docker images in the AWS Elastic Container Registry(ECR) from which we will directly create and update the lambda function.
+- We will upload the base model in S3 buckets and maintain model thropugh there.
+- As shown in diagram there will multiple lambda function for various tasks.
+
+### Benefits
+- As module can be maintained and used seperately. Like you only need sentiment analysis you can use that part only. Thus cost reduction can be achieved.
+- Using Lambda function ensure high availability of the systems.
+- The deployed system will be fast as model inference can be done parallely. Not a single will be depended on the other to be finished. 
+- System will **automatically scale up and down** when required.
+
+
+### Disadvantages
+- System looks very complex to maintain and update.
+- Multiple places to control a model.
+- Maintanence cost will be high.
+
+## ECS Bases Monolithic Approach
+- We can package the whole system in flask or django server inside a docker images.
+- The upload the image to ECR and deploy the system in **ECS fargate**. 
+- Models will be uploaded and maintained through S3.
+
+### Benefits
+- Single point of control
+- Simplicity in maintanance 
+- **Scales up and down when the load varies.**
+
+### Disadvantages
+- Different libraries may require various version of the sane library to run, this wil create problems during developed
+- Whole system will be running for one model inference thus system runtime will increase
+- Can't use a just single module if required as the whole system is interconnected.
+
+We can deploy the services in other cloud services using the similar types of services.
+
+But in house server can also be used, need to use load balancer in that case to cope with the various load in the system.
