@@ -76,3 +76,21 @@ This module will keep track of errors and model performances so that in future t
 
 - ## Booking and recommendation Module
 This module is directly connected with Database which store user's booking and recommendation information. Also, provide API to store booking and recommendation information.
+## How the Chatbot Module works
+
+So when an API gateway detect an API call for the chatbot, A session Manager is called which keeps track of each chat session then sends the request to the chatbot module with a session ID.
+
+Then input message get processed, first the message is sent NLU module to extract the intent, sentiment, names intentities etc. to get the question type. Based on the question type and other information the controller decides from which module the output is requested. 
+
+- If is a known fixed FAQ type question then it sends the message to the knowledge graph module.
+- If the message intent is to ask for a recommendation then the controller sends the message to the recommendation module.
+- If the NLU message isn't from the abobe two, it sends the message to the NLG module which is the conversational AI. **The controller provides the whole conversation in that session to request a answer for this scenerio.**
+- If the message intent is to ask for booking then it sends the message to query selector module. If the query selector finds out there isn't sufficient information then the controller ask generate response to ask the user to provide the additional information.
+
+The controller will save the responses and model performance to required places so that developers can maintain, upgrade and measure performanace of the chatbot. 
+
+There will be a database required to keep the logs of the performance and users preferences.
+
+This is how the chatbot module should work for each individual messages. 
+
+****
