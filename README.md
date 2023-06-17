@@ -1,4 +1,4 @@
-# AI Assistant [Chat Bot] Solution Architecture
+ # AI Assistant [Chat Bot] Solution Architecture
 
  ## Assumptions
  - Let's assume this chatbot will be developed by booking.com owners and they want to integrate this chatbot in their website and mobile applications. 
@@ -75,7 +75,8 @@ This module will keep track of errors and model performances so that in future t
 ***As our chatbot module is directly connected with booking and recommendation module we should descrive the functionality of this module too.***
 
 - ## Booking and recommendation Module
-This module is directly connected with Database which store user's booking and recommendation information. Also, provide API to store booking and recommendation information.
+This module is directly connected with Database which store user's booking and recommendation information. Also, provide API to store booking and recommendation information. 
+
 ## How the Chatbot Module works
 
 So when an API gateway detect an API call for the chatbot, A session Manager is called which keeps track of each chat session then sends the request to the chatbot module with a session ID.
@@ -94,6 +95,7 @@ There will be a database required to keep the logs of the performance and users 
 This is how the chatbot module should work for each individual messages. 
 
 ****
+
 # System Architecture
 
 *We have already assumed the developed system will be deplopyed in AWS. The following will be mostly based on AWS's services.*
@@ -141,6 +143,6 @@ But you need more accuracy and performance in house developed of GPT-3 based mod
 - Whole system will be running for one model inference thus system runtime will increase
 - Can't use a just single module if required as the whole system is interconnected.
 
-We can deploy the services in other cloud services using the similar types of services.
+*We can deploy the services in other cloud services using the similar types of services.*
 
-But in house server can also be used, need to use load balancer in that case to cope with the various load in the system.
+*But in house server can also be used, need to use load balancer in that case to cope with the various load in the system.*
