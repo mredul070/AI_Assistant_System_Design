@@ -76,7 +76,7 @@ This module will keep track of errors and model performances so that in future t
 
 - ## Booking and recommendation Module
 This module is directly connected with Database which store user's booking and recommendation information. Also, provide API to store booking and recommendation information. 
-
+![ChatBot Module Diagram](/images/Chatbot_module.png))
 ## How the Chatbot Module works
 
 So when an API gateway detect an API call for the chatbot, A session Manager is called which keeps track of each chat session then sends the request to the chatbot module with a session ID.
@@ -107,9 +107,9 @@ We can use  AWS DynamoDB for models internal usecases that we have stated earlie
 Model logs will be monitored in AWS cloudwatch and can be saved in S3 buckets for debugging.
 
 Finally for LLM/gpt-3 we can use AWS's in house service AWS LEX. 
-
+![using lex AWS architecture](/images/lex.png)
 But you need more accuracy and performance in house developed of GPT-3 based model in suggested which in deployed inside a Lambda Function.
-
+![using lambda AWS architecture](/images/lambda.png)
 ## AWS Lambda based Mircroservice Approach 
 - As stated in our solution we will be using multiple modules for various tasks. We will be needing various models in the chat bot. Like sentiment analysis and NER are two different models. In this approach we develop each model seperately train in locally and write down inference pipeline in a docker. 
 - Then upload the Docker images in the AWS Elastic Container Registry(ECR) from which we will directly create and update the lambda function.
@@ -132,7 +132,7 @@ But you need more accuracy and performance in house developed of GPT-3 based mod
 - We can package the whole system in flask or django server inside a docker images.
 - The upload the image to ECR and deploy the system in **ECS fargate**. 
 - Models will be uploaded and maintained through S3.
-
+![using ECS AWS architecture](/images/ECS.png)
 ### Benefits
 - Single point of control
 - Simplicity in maintanance 
