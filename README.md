@@ -107,6 +107,8 @@ We can use  AWS DynamoDB for models internal usecases that we have stated earlie
 Model logs will be monitored in AWS cloudwatch and can be saved in S3 buckets for debugging.
 
 Finally for LLM/gpt-3 we can use AWS's in house service AWS LEX. 
+
+**I didn't connect all the services based on description as it would the diagram very messy and hard to understand. just shown the important connection**
 ![using lex AWS architecture](/images/lex.png)
 But you need more accuracy and performance in house developed of GPT-3 based model in suggested which in deployed inside a Lambda Function.
 ![using lambda AWS architecture](/images/lambda.png)
