@@ -39,7 +39,7 @@ Our Solution should consist of the following modules
  *There could be multiple databases based on the overall architecture. For this tasks we will focus on the databases that will require to build the chatbot.*
  ### - Data Extraction Module 
  *This module is reuired for analysis various matrices for business needs.*
- 
+ ![System Architecture Image](/images/high_level_system_architecture.png)
 ****
 # The Chat Bot Module
 
